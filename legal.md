@@ -4,13 +4,13 @@ Where each policy lives and why the app is shaped the way it is. The pages are d
 
 | Policy | Page | Source |
 |---|---|---|
-| Privacy Policy (also the DPDP notice) | `/privacy` | `web/src/app/(legal)/privacy/page.tsx` |
-| Terms & Conditions | `/terms` | `web/src/app/(legal)/terms/page.tsx` |
-| Cookie Policy | `/cookies` | `web/src/app/(legal)/cookies/page.tsx` |
-| Refund & Cancellation Policy | `/refunds` | `web/src/app/(legal)/refunds/page.tsx` |
-| Acceptable Use Policy | `/acceptable-use` | `web/src/app/(legal)/acceptable-use/page.tsx` |
+| Privacy Policy (also the DPDP notice) | `/privacy` | `clients/apps/web/src/app/(legal)/privacy/page.tsx` |
+| Terms & Conditions | `/terms` | `clients/apps/web/src/app/(legal)/terms/page.tsx` |
+| Cookie Policy | `/cookies` | `clients/apps/web/src/app/(legal)/cookies/page.tsx` |
+| Refund & Cancellation Policy | `/refunds` | `clients/apps/web/src/app/(legal)/refunds/page.tsx` |
+| Acceptable Use Policy | `/acceptable-use` | `clients/apps/web/src/app/(legal)/acceptable-use/page.tsx` |
 
-The operator, contact address and "last updated" date are in `web/src/lib/brand.ts`. Change the date there whenever a policy changes, and update the pages whenever the app starts collecting something new or uses a new provider.
+The operator, contact address and "last updated" date are in `clients/apps/web/src/lib/brand.ts`. Change the date there whenever a policy changes, and update the pages whenever the app starts collecting something new or uses a new provider.
 
 ## Licence
 
@@ -32,7 +32,7 @@ India's Digital Personal Data Protection Act and the DPDP Rules, 2025. The opera
 | Right to correction and erasure (s.12) | Done | Edit tasks and name in the app; delete anything; email change by request |
 | Right to grievance redressal (s.13) | Done | Grievance contact and timelines in `/privacy` |
 | Right to nominate (s.14) | Done | By email, described in `/privacy` |
-| Erase data when consent is withdrawn (s.8(7)) | Done | Account deletion removes the user, lists, sessions, tokens, push addresses, feedback and solo teams (`web/src/lib/auth.ts`) |
+| Erase data when consent is withdrawn (s.8(7)) | Done | Account deletion removes the user, lists, sessions, tokens, push addresses, feedback and solo teams (`clients/apps/web/src/lib/auth.ts`) |
 | Reasonable security safeguards (s.8(5)) | Done | HTTPS, hashed passwords, per-workspace authorisation on every server action, secrets in env vars |
 | Children: verifiable parental consent, or don't serve them (s.9) | Done | 18+ only, stated in Terms and confirmed at sign-up |
 | Breach notification to people and the Board (s.8(6)) | Process | Committed to in `/privacy`; no automated alerting. If a breach happens, email affected users and report to the Data Protection Board within 72 hours |

@@ -121,7 +121,7 @@ Night is the default ground. Day swaps the ground to cream and the shadows to bl
 
 The landing page (Persuade) carries the loud version: tilted stickers, a slap-in entrance, a lime close band. The app (Operate) keeps the same materials but holds still: rows are untilted, colour marks state, and the only motion is the checkbox wobble and the progress fill.
 
-The product name is a working name and will change. It is set only in `web/src/lib/brand.ts` and rendered as live display type; no surface may bake it into a raster, a CSS `content` string, or copy outside that constant.
+The product name is a working name and will change. It is set only in `clients/apps/web/src/lib/brand.ts` and rendered as live display type; no surface may bake it into a raster, a CSS `content` string, or copy outside that constant.
 
 **Key Characteristics:**
 - Near-black ground, cream ink, whole-block accent fills.
@@ -259,7 +259,7 @@ Square box with a 2.5px keyline; cream (landing) or ground (app) at rest, lime w
 - **Do** use hard offset shadows with zero blur, cream on Night and black on Day.
 - **Do** redefine `--lift` and `--lift-sm` wherever a section changes `--shadow`.
 - **Do** turn lime emphasis text into a lime marker block behind ink text on Day.
-- **Do** read the product name from `web/src/lib/brand.ts` and render it as live text.
+- **Do** read the product name from `clients/apps/web/src/lib/brand.ts` and render it as live text.
 - **Do** keep text on sticker fills black, whatever the fill.
 
 ### Don't:
