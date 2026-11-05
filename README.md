@@ -45,7 +45,7 @@ CI (`.github/workflows/ci.yml`) and Drone (`.drone.yml`) run the same.
 ## Deploying
 
 - **Mac mini:** a push to `main` makes Drone rebuild and restart `server/docker-compose.yml` on the host (Postgres, server, web, reminders, and a Cloudflare Tunnel with `CLOUDFLARE_TUNNEL_TOKEN`). Mark the repo **Trusted** in Drone and add the settings as Drone secrets.
-- **Vercel:** two projects. `todone` is the web app (root `clients/apps/web`, `SERVER_URL` = the server's address). `todone-server` is the server (root `server/`): `npm run vercel-build` bundles it into one function, and it holds the database and auth, push and cron settings. Deploy the server to production so the web previews have a public API to forward to.
+- **Vercel:** two projects. `todone` is the web app (root `clients/apps/web`, `SERVER_URL` = the server's address). `todone-server` is the server (root `server/`): `npm run vercel-build` bundles it into one function, and it holds the database and auth, push and cron settings. Deploy the server to production so the web previews have a public API to forward to. The web app's production address is https://todone.today (www redirects to it); the server's `BETTER_AUTH_URL` is that address, and `BETTER_AUTH_TRUSTED_ORIGINS` lists the others it also serves (todone-flame.vercel.app, todone-develop.vercel.app).
 
 ## More
 
