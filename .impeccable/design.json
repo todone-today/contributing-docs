@@ -417,14 +417,6 @@
       "css": ".ds-input { width: 100%; padding: 0.85rem 1rem; font: 600 1.0625rem var(--sans, system-ui); color: var(--ink, #fff8ef); background: var(--raise, #171717); border: 2.5px solid var(--ink, #fff8ef); border-radius: 0; } .ds-input:focus-visible { outline: none; border-color: #d4f04a; box-shadow: 4px 4px 0 #d4f04a; }"
     },
     {
-      "name": "Command Chip",
-      "kind": "custom",
-      "refersTo": "command-chip",
-      "description": "Copyable mono install line with a lime prompt.",
-      "html": "<button class=\"ds-cmd\"><span class=\"ds-prompt\">$</span><code>brew install 1stdevfriend/tap/todone</code></button>",
-      "css": ".ds-cmd { display: inline-flex; align-items: center; gap: 0.7rem; padding: 0.8rem 1rem; font: 500 0.9rem/1.2 var(--mono, ui-monospace, monospace); color: var(--ink, #fff8ef); background: var(--raise, #171717); border: 2px solid var(--hair, #2c2c2c); border-radius: 0; cursor: pointer; transition: border-color 0.2s cubic-bezier(0.16,1,0.3,1); } .ds-cmd:hover { border-color: #d4f04a; } .ds-cmd:focus-visible { outline: 3px solid #46e0ee; outline-offset: 3px; } .ds-cmd code { font: inherit; } .ds-prompt { color: #d4f04a; }"
-    },
-    {
       "name": "Task Row",
       "kind": "custom",
       "refersTo": "list-item",

@@ -68,5 +68,6 @@ Each repo's `.github/workflows/ci.yml` runs its own; the server's `.drone.yml` r
 - [DESIGN.md](DESIGN.md): the visual system
 - [PRODUCT.md](PRODUCT.md): who it's for and what it does
 - [legal.md](legal.md): the policies and the DPDP Act review
+- [beta.md](beta.md): how the beta runs and how feedback comes back
 
 The project began as a terminal app; that history lives in the archived [1stdevfriend/todone](https://github.com/1stdevfriend/todone) (tag `tui-final`).
