@@ -65,8 +65,8 @@ Each repo's `.github/workflows/ci.yml` runs its own; the server's `.drone.yml` r
 
 ## More
 
-- [DESIGN.md](DESIGN.md): the visual system
-- [PRODUCT.md](PRODUCT.md): who it's for and what it does
+- [DESIGN.md](https://github.com/todone-today/clients/blob/main/DESIGN.md) and [PRODUCT.md](https://github.com/todone-today/clients/blob/main/PRODUCT.md): the visual system and the product, kept next to the UI in the clients repo
+- [pricing.md](pricing.md): plans, prices and the cloud business
 - [legal.md](legal.md): the policies and the DPDP Act review
 - [beta.md](beta.md): how the beta runs and how feedback comes back
 
