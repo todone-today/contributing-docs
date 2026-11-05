@@ -1,5 +1,14 @@
 # Contributing to todone
 
+todone ([todone.today](https://todone.today)) is split into repos by concern, like [Bitwarden](https://github.com/bitwarden):
+
+| Repo | What it is |
+|---|---|
+| [server](https://github.com/todone-today/server) | The API: accounts and teams, lists, integrations, reminders, migrations, Docker Compose and Drone |
+| [clients](https://github.com/todone-today/clients) | The apps people use; today `apps/web`, the Next.js web app |
+| [sdk](https://github.com/todone-today/sdk) | `@todone/sdk`, the logic both share |
+| contributing-docs | This: setup, architecture, design, product and legal notes |
+
 ## How it fits together
 
 ```
@@ -8,18 +17,23 @@ browser ──> clients/apps/web (Next.js) ──/api/*──> server (Hono + Be
                     └────────── @todone/sdk ────────────┘
 ```
 
-- **server/** owns all data and every rule about it: who may see or change what (`src/lib/access.ts`), validation, integrations and their secrets. Its routes are in `src/app.ts`; each calls a function in `src/actions/`.
-- **clients/apps/web/** is the UI. It never touches the database. Its `next.config.ts` forwards `/api/*` to the server, so the browser sees one address: the session cookie, OAuth callbacks and the calendar and Markdown links all belong to the web app. `src/lib/api.ts` is the only way it calls the server.
-- **sdk/** is plain TypeScript with no dependencies: the task model and its Obsidian Tasks Markdown format, calendar maths, CSV export, sync planning, and the API's response types (`src/api.ts`). Both sides import it as `@todone/sdk/<module>`.
-
-Node 24 runs the server and the tests as TypeScript directly; there's no build step outside the web app.
+- **server** owns all data and every rule about it: who may see or change what (`src/lib/access.ts`), validation, integrations and their secrets. Its routes are in `src/app.ts`; each calls a function in `src/actions/`.
+- **clients/apps/web** is the UI. It never touches the database. Its `next.config.ts` forwards `/api/*` to the server, so the browser sees one address: the session cookie, OAuth callbacks and the calendar and Markdown links all belong to the web app. `src/lib/api.ts` is the only way it calls the server.
+- **sdk** is plain TypeScript with no runtime dependencies: the task model and its Obsidian Tasks Markdown format, calendar maths, CSV export, sync planning and the API's response types (`src/api.ts`). Server and clients install it from GitHub at a tag (`github:todone-today/sdk#v0.1.0`), which builds it to JavaScript; they import it as `@todone/sdk/<module>`.
 
 ## Run it locally
+
+Clone the repos side by side:
+
+```sh
+git clone https://github.com/todone-today/server
+git clone https://github.com/todone-today/clients
+```
 
 ```sh
 cd server
 npm install
-npm run local        # Postgres in Node (PGlite, data in server/.pglite), migrations, API on :4000
+npm run local        # Postgres in Node (PGlite, data in .pglite), migrations, API on :4000
 ```
 
 ```sh
@@ -28,27 +42,31 @@ npm install
 npm run dev          # http://localhost:3000, forwarding /api to SERVER_URL (default http://localhost:4000)
 ```
 
-The server reads `server/.env.local` (see `server/.env.example`). Set `BETTER_AUTH_URL` to the web app's address (`http://localhost:3000`) and `BETTER_AUTH_SECRET` to a long random string.
+The server reads `.env.local` (see its `.env.example`). Set `BETTER_AUTH_URL` to the web app's address (`http://localhost:3000`) and `BETTER_AUTH_SECRET` to a long random string.
 
-With Docker instead: `docker compose -f server/docker-compose.yml up --build`, then open http://localhost:3000.
+With Docker instead: in the server repo, `docker compose up --build`, then open http://localhost:3000.
+
+To change the sdk and try it before releasing, `npm install ../sdk` in the server or web app, then put the tag back once the sdk is tagged.
 
 ## Checks
 
 ```sh
-cd sdk && npm test && npm run typecheck
-cd server && npm test && npm run typecheck
-cd clients/apps/web && npm run lint && npm test && npm run build
+sdk:             npm run typecheck && npm test && npm run build
+server:          npm run typecheck && npm test
+clients/apps/web: npm run lint && npm test && npm run build
 ```
 
-CI (`.github/workflows/ci.yml`) and Drone (`.drone.yml`) run the same.
+Each repo's `.github/workflows/ci.yml` runs its own; the server's `.drone.yml` runs its checks on the Mac mini.
 
 ## Deploying
 
-- **Mac mini:** a push to `main` makes Drone rebuild and restart `server/docker-compose.yml` on the host (Postgres, server, web, reminders, and a Cloudflare Tunnel with `CLOUDFLARE_TUNNEL_TOKEN`). Mark the repo **Trusted** in Drone and add the settings as Drone secrets.
-- **Vercel:** two projects. `todone` is the web app (root `clients/apps/web`, `SERVER_URL` = the server's address). `todone-server` is the server (root `server/`): `npm run vercel-build` bundles it into one function, and it holds the database and auth, push and cron settings. Deploy the server to production so the web previews have a public API to forward to. The web app's production address is https://todone.today (www redirects to it); the server's `BETTER_AUTH_URL` is that address, and `BETTER_AUTH_TRUSTED_ORIGINS` lists the others it also serves (todone-flame.vercel.app, todone-develop.vercel.app).
+- **Vercel:** two projects. `todone` is the web app (clients repo, root `apps/web`, `SERVER_URL` = the server's address), served at https://todone.today (www redirects to it). `todone-server` is the server repo: `npm run vercel-build` bundles it into one function, and it holds the database and the auth, push and cron settings. Its `BETTER_AUTH_URL` is https://todone.today, and `BETTER_AUTH_TRUSTED_ORIGINS` lists the other addresses it serves (todone-flame.vercel.app, todone-develop.vercel.app). With a `VERCEL_TOKEN` secret in each repo, a push to `main` deploys it (the server migrates the database first).
+- **Mac mini:** a push to the server repo's `main` makes Drone rebuild and restart its Docker Compose project on the host (Postgres, server, web built from the clients repo, reminders, and a Cloudflare Tunnel with `CLOUDFLARE_TUNNEL_TOKEN`). Mark the repo **Trusted** in Drone and add the settings as Drone secrets.
 
 ## More
 
 - [DESIGN.md](DESIGN.md): the visual system
 - [PRODUCT.md](PRODUCT.md): who it's for and what it does
 - [legal.md](legal.md): the policies and the DPDP Act review
+
+The project began as a terminal app; that history lives in the archived [1stdevfriend/todone](https://github.com/1stdevfriend/todone) (tag `tui-final`).

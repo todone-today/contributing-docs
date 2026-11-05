@@ -8,7 +8,7 @@ web
 
 ## Stack
 
-Repos by concern, Bitwarden-style (folders in this repo for now): `clients/apps/web` (Next.js App Router, deployed on Vercel; pushes to `develop` deploy previews, `main` production) and `contributing-docs`. The terminal app is retired (tag `tui-final`).
+Repos by concern, Bitwarden-style, in the todone-today GitHub org: `clients` (`apps/web`, Next.js App Router, deployed on Vercel at todone.today), `server` (Hono API, Postgres), `sdk` (shared logic) and `contributing-docs`. The terminal app is retired (tag `tui-final` in the archived 1stdevfriend/todone).
 
 ## Users
 
