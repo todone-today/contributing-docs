@@ -25,6 +25,11 @@ Why freemium rather than paid-from-day-one or free-unlimited:
 How these were picked:
 
 - **India first, honest international.** ₹99 a month sits with Indian productivity subscriptions (₹99–₹199) and is an easy UPI tap; $3 internationally sits just under Todoist Pro (about $4 a month billed yearly) and level with TickTick Premium (about $36 a year), fitting for a newer, smaller app. Check their current prices before launch. Not a straight currency conversion: purchasing power differs, and Razorpay shows the visitor's currency.
+- **Launch prices (first term only).** 6 months: Plus ₹349 / $11, Team ₹549 / $18 a person. Yearly: Plus ₹599 / $19,
+  Team ₹999 / $33 a person. They renew at the normal prices above, and the card always says so (India's 2023 dark
+  patterns guidelines rule out hiding the renewal). The toggle's "save %" compares the first term with paying monthly
+  for as long, rounded down: yearly 49%, 6 months 41%. Founding (₹1,999 for 3 years) still beats yearly at launch
+  prices (₹599 + ₹899 + ₹899 = ₹2,397). Values live in `clients/apps/web/src/lib/landing.ts`.
 - **Annual is the plan to sell.** ₹899 is ~25% off twelve months (₹1,188); six months (₹499) is ~16% off. Expect most paying users on annual: it cuts churn and the per-charge payment fee, and the six-month option catches people who won't commit to a year. Monthly exists so the first payment is small.
 - **Team per person**, since cost and value both scale with people.
 
