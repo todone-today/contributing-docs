@@ -17,9 +17,9 @@ Why freemium rather than paid-from-day-one or free-unlimited:
 | Plan | India | International | Who it's for |
 |---|---|---|---|
 | Free | ₹0 | $0 | Personal use: up to 10 lists, no teams or sharing; sync, offline, integrations, export |
-| Plus | ₹99 / month · ₹499 / 6 months · ₹899 / year | $3 / month · $16 / 6 months · $29 / year | Power users: unlimited lists, teams up to 10, restorable daily backups, early mobile access |
+| Plus | ₹99 / month · ₹499 / 6 months · ₹899 / year | $3 / month · $16 / 6 months · $29 / year | Power users and households: unlimited lists (fair use), share with up to 6 people, restorable daily backups, early mobile access |
 | Team | ₹149 / person / month · ₹1,499 / person / year | $5 / person / month · $49 / person / year | Households and small teams: unlimited people and teams, roles, priority help |
-| Founding member | ₹1,999 once | $59 once | Early supporters: 3 years of Plus, credits, and it funds the app-store accounts |
+| Founding member | ₹1,999 once | $59 once | Early supporters: 3 years of Plus, paid once; it funds the app-store accounts |
 | Self-host | free | free | Anyone, every feature, GPL-3.0 |
 
 How these were picked:
@@ -52,7 +52,7 @@ Per paying user, per year, at ₹899 (≈ $10.70):
 | Backups and bandwidth | Small; tasks are text |
 | Support | The real cost: your time |
 
-So each Plus subscriber nets roughly ₹700–850 a year. The fixed costs that matter are the hosting tiers once free tiers run out: Vercel Pro (about $20 a month) and Neon's paid plan (from about $19 a month; check current prices), about ₹3,300 a month together. **Around 50 annual Plus subscribers cover the hosting**; everything after that funds development.
+So each Plus subscriber nets roughly ₹700–850 a year. Fixed costs are small since the move to the VPS (6 November 2026): the Contabo server, already paid and shared with other projects, and the domain. The website (Vercel), email (Resend), error tracking (Sentry), uptime (UptimeRobot) and off-site backups (Cloudflare R2) all run on free tiers at this size. **About 10 annual Plus subscribers cover what todone itself costs**; everything after that funds the goals and development.
 
 The free tier's cost is small (text data, idle most of the time), so it can stay generous. Watch for the exception, scripted abuse, and handle it with rate limits rather than smaller limits.
 
@@ -63,7 +63,10 @@ Customer acquisition should cost close to nothing: open source, the demo, word o
 - **Free:** personal use only, 10 lists, unlimited tasks within them, every integration. No teams or sharing: working with other people is what Plus and Team are for.
 - **Abuse:** rate-limit writes per account and per IP at the API, cap list size (already validated server-side), and block signup bursts. None of this should ever be noticed by a normal user.
 - **Backups:** Plus and Team get daily backups restorable from the Account page; that's the paid feature with real cost, and it must ship before Plus does.
-- **Teams:** sharing starts at Plus (teams up to 10, enough for a household); bigger teams are Team pricing.
+- **Plus, unlimited lists (fair use):** a hard cap of 500 lists per account, far beyond any person (the heaviest
+  real accounts have a few dozen), so it only ever stops scripts and bots. Hitting it shows a plain message, not an
+  upsell.
+- **Sharing:** starts at Plus, with up to 6 people (a household, a flat, a small project). More people is Team.
 - None of the limits exist in code yet. Enforce them when checkout launches, never retroactively without notice, and grandfather anyone already over them.
 
 ## What has to exist before charging
