@@ -10,7 +10,7 @@ the client IPs it receives are real.
 | `/root/todone` | clone of `todone-today/server`; `.env` (root only) holds every secret |
 | `docker compose -p todone` | `db`, `server`, `reminders` (calls the cron every 10 min), `caddy` (443 only) |
 | `/root/todone-backups` | nightly `pg_dump` at 03:17 server time, 14 days kept (`scripts/backup.sh`, run by `/etc/cron.d/todone-backup`, log in `/var/log/todone-backup.log`) |
-| R2 `todone-backups` | the same dumps encrypted with `age` to the owner's key (`/root/todone/backup.age-recipient`): `daily/` 15 days, `monthly/` a year. rclone remote `r2` in `/root/.config/rclone/rclone.conf` |
+| R2 `todone-backups` | the same dumps encrypted with `age` to the owner's key (`/root/todone/backup.age-recipient`): `daily/` 15 days, `monthly/` a year. rclone remote `r2` in `/root/.config/rclone/rclone.conf` (`provider = Cloudflare`, `no_check_bucket = true`, `no_head = true`: R2 refuses the version check rclone does after uploading) |
 
 Every run checks in with Sentry Crons (`todone-backup`), which emails when a night fails or doesn't happen. On
 Sundays the script also restores the dump into a throwaway Postgres and compares row counts; run that any time with
