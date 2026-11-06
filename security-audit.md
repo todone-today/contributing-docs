@@ -33,8 +33,8 @@ the .github repo), not in issues.
 ## Follow-ups
 
 - Rotate any key that has been shared outside the env store (the Resend key was pasted into a chat).
-- Production has no cron scheduler yet: reminders, unconfirmed-account cleanup and rate-limit pruning run on sign-up
-  and when `/api/cron/notify` is called. Add a Vercel Cron or an external pinger.
+- ~~Production has no cron scheduler.~~ Since the move to the VPS, the `reminders` service calls the cron every 10
+  minutes.
 - A full Content-Security-Policy with `script-src` needs nonces from Next; the current CSP covers framing, forms and
   plugins only.
 - Re-run this audit before payments go live (Razorpay webhooks need signature checks).

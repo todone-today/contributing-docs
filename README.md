@@ -73,3 +73,4 @@ Each repo's `.github/workflows/ci.yml` runs its own; the server's `.drone.yml` r
 The project began as a terminal app; that history lives in the archived [1stdevfriend/todone](https://github.com/1stdevfriend/todone) (tag `tui-final`).
 
 - [Security audit](security-audit.md): what was checked and fixed, 6 November 2026.
+- [The VPS](vps.md): where the API runs, deploys, backups and restores.
