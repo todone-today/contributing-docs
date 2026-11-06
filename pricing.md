@@ -16,7 +16,7 @@ Why freemium rather than paid-from-day-one or free-unlimited:
 
 | Plan | India | International | Who it's for |
 |---|---|---|---|
-| Free | ₹0 | $0 | Everyday use: up to 10 lists, one team of up to 5, every feature, sync, offline, export |
+| Free | ₹0 | $0 | Personal use: up to 10 lists, no teams or sharing; sync, offline, integrations, export |
 | Plus | ₹99 / month · ₹499 / 6 months · ₹899 / year | $3 / month · $16 / 6 months · $29 / year | Power users: unlimited lists, teams up to 10, restorable daily backups, early mobile access |
 | Team | ₹149 / person / month · ₹1,499 / person / year | $5 / person / month · $49 / person / year | Households and small teams: unlimited people and teams, roles, priority help |
 | Founding member | ₹1,999 once | $59 once | Early supporters: 3 years of Plus, credits, and it funds the app-store accounts |
@@ -60,10 +60,10 @@ Customer acquisition should cost close to nothing: open source, the demo, word o
 
 ## Cloud limits and fairness
 
-- **Free:** 10 lists, 1 team of 5, unlimited tasks within them, every integration. Enough for almost everyone.
+- **Free:** personal use only, 10 lists, unlimited tasks within them, every integration. No teams or sharing: working with other people is what Plus and Team are for.
 - **Abuse:** rate-limit writes per account and per IP at the API, cap list size (already validated server-side), and block signup bursts. None of this should ever be noticed by a normal user.
 - **Backups:** Plus and Team get daily backups restorable from the Account page; that's the paid feature with real cost, and it must ship before Plus does.
-- **Teams:** the free team of 5 covers a household; bigger teams are where Team pricing starts.
+- **Teams:** sharing starts at Plus (teams up to 10, enough for a household); bigger teams are Team pricing.
 - None of the limits exist in code yet. Enforce them when checkout launches, never retroactively without notice, and grandfather anyone already over them.
 
 ## What has to exist before charging
