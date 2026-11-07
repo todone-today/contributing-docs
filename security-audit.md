@@ -70,3 +70,31 @@ Known limits:
 - Confirming a member trusts the public key the server returns; the fingerprint (Account) is how to check it.
 - A compromised server could ship altered JavaScript; that's true of every web app doing end-to-end encryption.
 - Reminders run in the open app (any tab), since the server can't see due dates.
+
+## Attachments and sharing one task by link, 8 November 2026
+
+- **Private attachments** are AES-256-GCM encrypted in the browser with the list's key (account or team), with
+  `file:<id>` as additional data, and uploaded straight to Cloudflare R2 with a presigned PUT (5 minutes). The server
+  sees name, type and size only. It checks the size after upload (HEAD) and counts it against a 1 GB workspace quota.
+- **Sharing one task** is opt-in per task, behind a dialog that says it won't be end-to-end encrypted. The browser sends
+  a readable copy (title, fields, description, steps) to `task_share`; the encrypted original is untouched and edits are
+  pushed to the copy while sharing is on.
+- **The link** is `/t/<token>`: 32 random bytes, base64url. It's the only key; every guest request looks it up first, so
+  "New link" and "Stop sharing" cut access on the next request. Guest responses carry no owner email or workspace ids,
+  and file and comment ids are checked against the share, so a token reaches nothing else.
+- **Guests** are anonymous: a random key their browser keeps maps to "Guest N" for that share (reset on a new link).
+  Comments are ≤ 4,000 characters, shown as text (never HTML); replies are one level deep.
+- **Guest files**: images, videos (MP4, MOV, WebM), PDF and plain text. Type and size are checked when the upload URL is
+  asked for, then again on R2: the real size, and the first bytes against the type's signature. A mismatch deletes the
+  object. Downloads are presigned GETs (5 minutes); only images and videos are shown inline, the rest download, and
+  R2 is a different origin from the site. Caps: 10 MB (50 MB video), 200 MB per share.
+- **Rate limits** per token and IP: reads 120/min, comments 20/min, uploads 30/hour.
+- **Stop sharing**: the browser copies the comments into the task's encrypted history and re-uploads the media encrypted
+  (warning first if any can't be kept), then the server deletes the rows and the R2 objects.
+- Uploads never confirmed are deleted after a day (cron).
+
+Known limits:
+- Anyone who had the link could have saved what they saw; stopping sharing can't take that back.
+- A guest's random key is in `localStorage`; clearing it makes them a new guest number. Guests can't edit or delete their
+  comments.
+
