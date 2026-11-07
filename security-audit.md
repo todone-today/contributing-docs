@@ -82,7 +82,7 @@ Known limits:
 - **The link** is `/t/<token>`: 32 random bytes, base64url. It's the only key; every guest request looks it up first, so
   "New link" and "Stop sharing" cut access on the next request. Guest responses carry no owner email or workspace ids,
   and file and comment ids are checked against the share, so a token reaches nothing else.
-- **Guests** are anonymous: a random key their browser keeps maps to "Guest N" for that share (reset on a new link).
+- **Guests** are anonymous: a random key their browser keeps tells their comments apart from other guests' (shown to everyone as "Anonymous"; reset on a new link).
   Comments are ≤ 4,000 characters, shown as text (never HTML); replies are one level deep.
 - **Guest files**: images, videos (MP4, MOV, WebM), PDF and plain text. Type and size are checked when the upload URL is
   asked for, then again on R2: the real size, and the first bytes against the type's signature. A mismatch deletes the
