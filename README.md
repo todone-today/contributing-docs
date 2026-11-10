@@ -67,6 +67,7 @@ Each repo's `.github/workflows/ci.yml` runs its own; the server's `.drone.yml` r
 
 - [DESIGN.md](https://github.com/todone-today/clients/blob/main/DESIGN.md) and [PRODUCT.md](https://github.com/todone-today/clients/blob/main/PRODUCT.md): the visual system and the product, kept next to the UI in the clients repo
 - [pricing.md](pricing.md): plans, prices and the cloud business
+- [billing.md](billing.md): how payments work, going live with Razorpay, and the GST checklist
 - [legal.md](legal.md): the policies and the DPDP Act review
 - [beta.md](beta.md): how the beta runs and how feedback comes back
 

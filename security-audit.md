@@ -87,7 +87,7 @@ Known limits:
 - **Guest files**: images, videos (MP4, MOV, WebM), PDF and plain text. Type and size are checked when the upload URL is
   asked for, then again on R2: the real size, and the first bytes against the type's signature. A mismatch deletes the
   object. Downloads are presigned GETs (5 minutes); only images and videos are shown inline, the rest download, and
-  R2 is a different origin from the site. Caps: 10 MB (50 MB video), 200 MB per share.
+  R2 is a different origin from the site. Caps: 5 MB images (shrunk in the browser first), 10 MB documents, 50 MB video, 200 MB per share.
 - **Rate limits** per token and IP: reads 120/min, comments 20/min, uploads 30/hour.
 - **Stop sharing**: the browser copies the comments into the task's encrypted history and re-uploads the media encrypted
   (warning first if any can't be kept), then the server deletes the rows and the R2 objects.

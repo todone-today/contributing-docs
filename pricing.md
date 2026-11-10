@@ -1,6 +1,6 @@
 # Pricing and the cloud business
 
-The recommendation behind the plans on [todone.today](https://todone.today/#pricing), and the numbers it rests on. Prices live in `clients/apps/web/src/lib/landing.ts`; change them there.
+The recommendation behind the plans on [todone.today](https://todone.today/#pricing), and the numbers it rests on. Prices are shown from `clients/apps/web/src/lib/landing.ts` and charged from `server/src/lib/plans.ts`; change both together (see [billing.md](billing.md)).
 
 ## The model in one line
 
